@@ -38,8 +38,6 @@ export class AwsCognitoService {
         },
 
         onFailure: function (err) {
-          console.log(err.message || JSON.stringify(err));
-
           return reject(err.message || JSON.stringify(err));
         },
       });

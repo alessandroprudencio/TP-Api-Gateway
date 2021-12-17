@@ -17,8 +17,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     this.logger.error(`Http Status: ${status} Error Message: ${JSON.stringify(error)}`);
 
-    console.log(error);
-
     response.status(status).json({
       timestamp: new Date().toISOString(),
       error,
