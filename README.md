@@ -9,7 +9,7 @@
 
 ## Description
 
-API Gateway that encapsulates the system's internal architecture and offers a custom API for each client
+API Gateway that encapsulates the system's internal architecture and offers a custom API for each client.
 
 ## Architecture
 
