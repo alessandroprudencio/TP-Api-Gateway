@@ -6,7 +6,7 @@ export interface IPlayer extends Document {
   phoneNumber: string;
   readonly email: string;
   name: string;
-  ranking: string;
+  score: number;
   positionRanking: number;
   avatar: string;
   category: ICategory;

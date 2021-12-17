@@ -5,6 +5,7 @@ export interface ICategory extends Document {
   readonly _id: string;
   name: string;
   description: string;
+  score: number;
   events: Array<Event>;
   players: Array<IPlayer>;
 }

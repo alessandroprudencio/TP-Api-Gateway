@@ -65,12 +65,12 @@ export class ChallengesController {
     return this.clientRabbitMQChallenge.emit('delete-challenge', id);
   }
 
-  @Post(':id/set-score')
+  @Post(':id/set-result')
   @UsePipes(ValidationPipe)
   async setScoreChallenge(
-    @Body() setScoreDto: SetScoreChallengeDto,
     @Param('id') id: string,
+    @Body() setScoreDto: SetScoreChallengeDto,
   ): Promise<Observable<any>> {
-    return this.clientRabbitMQChallenge.emit('set-score-challenge', { id, result: setScoreDto });
+    return this.clientRabbitMQChallenge.emit('set-result-challenge', { id, result: setScoreDto });
   }
 }
