@@ -5,7 +5,7 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-<p align="center">Tennis player connecting players.</p>
+<p align="center">Tennis Player, connecting tennis players.</p>
 
 ## Description
 
@@ -46,6 +46,15 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Built with
+
+* [NestJS](https://nestjs.com/)
+* [RabbitMQ](https://www.rabbitmq.com/)
+* [MongoDB](https://www.mongodb.com/)
+* [Bitnami](https://bitnami.com/)
+* [AWS](https://aws.amazon.com/)
+* [AWS S3](https://aws.amazon.com/s3)
 
 ## Support
 
