@@ -11,5 +11,3 @@ COPY . .
 RUN yarn
 
 RUN yarn run build
-
-CMD ["yarn", "run", "start:dev"]  
