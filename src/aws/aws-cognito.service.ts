@@ -9,8 +9,8 @@ export class AwsCognitoService {
 
   constructor(private cognitoConfig: AwsCognitoConfig) {
     this.userPool = new CognitoUserPool({
-      UserPoolId: this.cognitoConfig.userPoolId,
-      ClientId: this.cognitoConfig.clientId,
+      UserPoolId: cognitoConfig.userPoolId,
+      ClientId: cognitoConfig.clientId,
     });
   }
 

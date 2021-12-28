@@ -17,44 +17,24 @@ API Gateway that encapsulates the system's internal architecture and offers a cu
 
 ## Installation
 
-```bash
-$ npm install
-```
+Use .env.example to create a new .env at the root of the directory and set all variables.
 
 ## Running the app
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+$ docker-compose up --build
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
+The player will be created according to what was filled in the variables ​​DEFAULT PLAYER, use it to login to the application, remember that an email will be sent to confirm the user.
 
 ## Built with
 
-* [NestJS](https://nestjs.com/)
-* [RabbitMQ](https://www.rabbitmq.com/)
-* [MongoDB](https://www.mongodb.com/)
-* [Bitnami](https://bitnami.com/)
-* [AWS](https://aws.amazon.com/)
-* [AWS S3](https://aws.amazon.com/s3)
+- [NestJS](https://nestjs.com/)
+- [RabbitMQ](https://www.rabbitmq.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Bitnami](https://bitnami.com/)
+- [AWS](https://aws.amazon.com/)
+- [AWS S3](https://aws.amazon.com/s3)
 
 ## Support
 

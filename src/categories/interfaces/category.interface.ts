@@ -6,12 +6,5 @@ export interface ICategory extends Document {
   name: string;
   description: string;
   score: number;
-  events: Array<Event>;
-  players: Array<IPlayer>;
-}
-
-export interface IEvent extends Document {
-  name: string;
-  operation: string;
-  value: number;
+  players?: Array<IPlayer>;
 }

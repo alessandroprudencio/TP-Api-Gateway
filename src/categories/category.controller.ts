@@ -19,10 +19,11 @@ import { ClientProxyRabbitMq } from 'src/proxyrmq/client-proxy';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
-@UseGuards(AuthGuard('jwt'))
 @Controller('api/v1/categories')
 export class CategoryController {
-  constructor(private clientProxy: ClientProxyRabbitMq) {}
+  constructor(private clientProxy: ClientProxyRabbitMq) {
+    this.clientProxy = clientProxy;
+  }
 
   private clientRabbitMQAdmin = this.clientProxy.getClientProxyRabbitmq('micro-admin-back');
   private clientRabbitMQChallenge = this.clientProxy.getClientProxyRabbitmq('micro-challenge-back');
@@ -33,6 +34,7 @@ export class CategoryController {
   }
 
   @Post()
+  @UseGuards(AuthGuard('jwt'))
   @UsePipes(ValidationPipe)
   async create(@Body() createCategoryDto: CreateCategoryDto) {
     const resp = await lastValueFrom(this.clientRabbitMQAdmin.send('create-category', createCategoryDto));
@@ -46,11 +48,13 @@ export class CategoryController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   findOne(@Param('id', MongoIdValidation) id: string): Observable<any> {
     return this.clientRabbitMQAdmin.send('find-one-category', id);
   }
 
   @Put(':id')
+  @UseGuards(AuthGuard('jwt'))
   @UsePipes(ValidationPipe)
   async update(@Param('id', MongoIdValidation) id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
     const resp = await lastValueFrom(
@@ -65,6 +69,7 @@ export class CategoryController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('jwt'))
   remove(@Param('id') id: string) {
     this.clientRabbitMQAdmin.emit('delete-category', id);
 

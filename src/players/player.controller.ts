@@ -22,13 +22,16 @@ import { ClientProxyRabbitMq } from 'src/proxyrmq/client-proxy';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
 import { IPlayer } from './interfaces/player.interface';
+import { Express } from 'express';
 
 @Controller('api/v1/players')
 export class PlayerController {
   private clientRabbitMQAdmin = this.clientProxy.getClientProxyRabbitmq('micro-admin-back');
   private clientRabbitMQChallenge = this.clientProxy.getClientProxyRabbitmq('micro-challenge-back');
 
-  constructor(private clientProxy: ClientProxyRabbitMq) {}
+  constructor(private clientProxy: ClientProxyRabbitMq) {
+    this.clientProxy = clientProxy;
+  }
 
   @Get()
   @UseGuards(AuthGuard('jwt'))
@@ -76,5 +79,13 @@ export class PlayerController {
     this.clientRabbitMQAdmin.emit('delete-player', id);
 
     this.clientRabbitMQChallenge.emit('delete-player', id);
+  }
+
+  @Put(':id/set-push-token')
+  @UseGuards(AuthGuard('jwt'))
+  setPushToken(@Param('id') id: string, @Body() body: any) {
+    this.clientRabbitMQAdmin.emit('set-push-token', { id, pushToken: body.pushToken });
+
+    this.clientRabbitMQChallenge.emit('set-push-token', { id, pushToken: body.pushToken });
   }
 }

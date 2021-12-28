@@ -16,9 +16,3 @@ export class CreateCategoryDto {
   // @ArrayMinSize(1)
   // events: Array<Event>;
 }
-
-interface Event {
-  name: string;
-  operation: string;
-  value: number;
-}

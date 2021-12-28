@@ -24,7 +24,9 @@ import { IChallenge } from './interfaces/challenge.interface';
 @UseGuards(AuthGuard('jwt'))
 @Controller('api/v1/challenges')
 export class ChallengesController {
-  constructor(private clientProxy: ClientProxyRabbitMq) {}
+  constructor(private clientProxy: ClientProxyRabbitMq) {
+    this.clientProxy = clientProxy;
+  }
 
   private clientRabbitMQChallenge = this.clientProxy.getClientProxyRabbitmq('micro-challenge-back');
 

@@ -1,0 +1,76 @@
+version: '3.9'
+
+services:
+  tp-api-gateway:
+    container_name: tp-api-gateway
+    build: .
+    image: tp-api-gateway
+    ports:
+      - '${PORT}:${PORT}'
+    restart: unless-stopped
+    volumes:
+      - '.:/usr/tennis-player/tp-api-gateway'
+    depends_on:
+      - rabbitmq
+      - tp-micro-admin
+      - tp-micro-challenge
+      - tp-micro-notification
+      - tp-micro-ranking
+    command: sh -c "./wait-for-it.sh rabbitmq:15672 --timeout=5000 && yarn run
+      start:dev"
+
+  tp-micro-admin:
+    container_name: tp-micro-admin
+    image: tp-micro-admin
+    restart: unless-stopped
+    command: sh -c "./wait-for-it.sh rabbitmq:15672 --timeout=5000 && yarn run
+      start:dev"
+
+  tp-micro-challenge:
+    container_name: tp-micro-challenge
+    image: tp-micro-challenge
+    restart: unless-stopped
+    command: sh -c "./wait-for-it.sh rabbitmq:15672 --timeout=5000 && yarn run
+      start:dev"
+
+  tp-micro-notification:
+    container_name: tp-micro-notification
+    image: tp-micro-notification
+    restart: unless-stopped
+    command: sh -c "./wait-for-it.sh rabbitmq:15672 --timeout=5000 && yarn run
+      start:dev"
+
+  tp-micro-ranking:
+    container_name: tp-micro-ranking
+    image: tp-micro-ranking
+    restart: unless-stopped
+    command: sh -c "./wait-for-it.sh rabbitmq:15672 --timeout=5000 && yarn run
+      start:dev"
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: bitnami/rabbitmq:latest
+    environment:
+      - RABBITMQ_USERNAME=${RABBIT_MQ_USERNAME}
+      - RABBITMQ_PASSWORD=${RABBIT_MQ_PASSWORD}
+      - RABBITMQ_VHOST=${RABBIT_MQ_VHOST}
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    volumes:
+      - './.docker/rabbitmqstats_data:/bitnami'
+    restart: unless-stopped
+
+  # SERVICE MONGO DB ONLY DEV
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    ports:
+      - '27017:27017'
+    volumes:
+      - './.docker/mongo/db:/data/db'
+      - './.docker/mongo/configdb:/data/configdb'
+    restart: unless-stopped
