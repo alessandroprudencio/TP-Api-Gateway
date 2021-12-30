@@ -51,6 +51,11 @@ export class ChallengesController {
     return this.clientRabbitMQChallenge.send('find-challenges-player', playerId);
   }
 
+  @Get(':playerId/players/history')
+  async findHistoryPlayer(@Param('playerId', MongoIdValidation) playerId: string): Promise<Observable<IChallenge>> {
+    return this.clientRabbitMQChallenge.send('history-challenges-player', playerId);
+  }
+
   @Put(':id')
   @UsePipes(ValidationPipe)
   async update(
