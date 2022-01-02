@@ -34,7 +34,16 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-.env
-.env.production
+/.envs/tp-micro-admin/.env
+/.envs/tp-micro-notification/.env
+/.envs/tp-micro-challenge/.env
+/.envs/tp-micro-ranking/.env
+/.envs/tp-micro-admin/.env.production
+/.envs/tp-micro-notification/.env.production
+/.envs/tp-micro-challenge/.env.production
+/.envs/tp-micro-ranking/.env.production
 
 /.docker/
+
+.env.production
+.env

@@ -17,7 +17,7 @@ API Gateway that encapsulates the system's internal architecture and offers a cu
 
 ## Installation
 
-Use .env.example to create a new .env at the root of the directory and set all variables.
+Use .env.example to create a new .env in the root of the directory and create new ones for the other microservices in the /.envs folder as well
 
 ## Running the app
 
@@ -35,6 +35,7 @@ The player will be created according to what was filled in the variables ​​D
 - [Bitnami](https://bitnami.com/)
 - [AWS](https://aws.amazon.com/)
 - [AWS S3](https://aws.amazon.com/s3)
+- [ECS](https://aws.amazon.com/ecs)
 
 ## Connect with me:
 
