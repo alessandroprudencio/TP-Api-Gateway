@@ -1,7 +1,7 @@
 import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { lastValueFrom } from 'rxjs';
-import { ICategory } from './categories/interfaces/category.interface';
+// import { ICategory } from './categories/interfaces/category.interface';
 import { ClientProxyRabbitMq } from './proxyrmq/client-proxy';
 
 @Injectable()
@@ -57,7 +57,9 @@ export class AppService implements OnApplicationBootstrap {
 
     for await (const category of categories) {
       try {
-        if (categoriesDatabase.length === 0 || categoriesDatabase.find((item) => item.name !== category.name)) {
+        const existCategory = !!categoriesDatabase.find((item) => item.name === category.name);
+
+        if (categoriesDatabase.length === 0 || !existCategory) {
           this.logger.log(`Create category=>${JSON.stringify(category)}`);
 
           const resp = await this.createCategory(category);
@@ -82,32 +84,32 @@ export class AppService implements OnApplicationBootstrap {
     return resp;
   }
 
-  async adminSeeder(categoriesCreated: ICategory[]) {
-    const users = [
-      {
-        name: this.configService.get('DEFAULT_PLAYER_NAME'),
-        phoneNumber: this.configService.get('DEFAULT_PLAYER_PHONE_NUMBER'),
-        email: this.configService.get('DEFAULT_PLAYER_EMAIL'),
-        category: categoriesCreated[0]._id,
-        password: this.configService.get('DEFAULT_PLAYER_PASSWORD'),
-        avatar: this.configService.get('DEFAULT_PLAYER_AVATAR_URL'),
-      },
-    ];
+  // async adminSeeder(categoriesCreated: ICategory[]) {
+  //   const users = [
+  //     {
+  //       name: this.configService.get('DEFAULT_PLAYER_NAME'),
+  //       phoneNumber: this.configService.get('DEFAULT_PLAYER_PHONE_NUMBER'),
+  //       email: this.configService.get('DEFAULT_PLAYER_EMAIL'),
+  //       category: categoriesCreated[0]._id,
+  //       password: this.configService.get('DEFAULT_PLAYER_PASSWORD'),
+  //       avatar: this.configService.get('DEFAULT_PLAYER_AVATAR_URL'),
+  //     },
+  //   ];
 
-    const usersDatabase: any[] = await lastValueFrom(this.clientRabbitMQAdmin.send('find-all-player', ''));
+  //   const usersDatabase: any[] = await lastValueFrom(this.clientRabbitMQAdmin.send('find-all-player', ''));
 
-    const existUser = await usersDatabase.find((user) => user.email === this.configService.get('DEFAULT_PLAYER_EMAIL'));
+  //   const existUser = await usersDatabase.find((user) => user.email === this.configService.get('DEFAULT_PLAYER_EMAIL'));
 
-    if (existUser) return existUser;
+  //   if (existUser) return existUser;
 
-    for await (const user of users) {
-      try {
-        this.logger.log(`Create user=>${JSON.stringify(user)}`);
+  //   for await (const user of users) {
+  //     try {
+  //       this.logger.log(`Create user=>${JSON.stringify(user)}`);
 
-        this.clientRabbitMQAdmin.emit('create-user-player', { ...user });
-      } catch (error) {
-        if (error.message.includes('E11000')) this.logger.log(`Seeder : ${error.message}`);
-      }
-    }
-  }
+  //       this.clientRabbitMQAdmin.emit('create-user-player', { ...user });
+  //     } catch (error) {
+  //       if (error.message.includes('E11000')) this.logger.log(`Seeder : ${error.message}`);
+  //     }
+  //   }
+  // }
 }
