@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { config } from 'dotenv';
+import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { AwsModule } from './aws/aws.module';
@@ -22,6 +23,7 @@ config();
     AuthModule,
     AwsModule,
   ],
+  controllers: [AppController],
   providers: [AppService, ClientProxyRabbitMq],
   exports: [AppService],
 })
