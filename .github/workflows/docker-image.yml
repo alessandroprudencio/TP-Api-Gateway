@@ -27,5 +27,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: alessandroprudencio/tp-api-gateway:$(date +%s)
+          tags: alessandroprudencio/tp-api-gateway:latest
           labels: ${{ steps.meta.outputs.labels }}
