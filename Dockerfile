@@ -6,8 +6,8 @@ RUN yarn global add @nestjs/cli
 
 WORKDIR /usr/tennis-player/tp-api-gateway
 
+COPY package*.json ./
+
+RUN yarn  
+
 COPY . .
-
-RUN yarn
-
-RUN yarn run build

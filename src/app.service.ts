@@ -21,20 +21,21 @@ export class AppService implements OnApplicationBootstrap {
     try {
       this.logger.log('Running seeders');
 
-      const categoriesCreated = await this.categorySeeder();
+      await this.categorySeeder();
 
-      console.log('categoriesCreated=>', categoriesCreated);
+      // console.log('categoriesCreated=>', categoriesCreated);
 
-      if (categoriesCreated && categoriesCreated.length > 0) await this.adminSeeder(categoriesCreated);
+      // if (process.env.NODE_ENV !== 'production') return;
+
+      // if (categoriesCreated && categoriesCreated.length > 0) await this.adminSeeder(categoriesCreated);
     } catch (error) {
+      console.log(error);
       this.logger.error('Error running seeders.');
     }
   }
 
   async categorySeeder() {
     const categoriesDatabase: any[] = await lastValueFrom(this.clientRabbitMQAdmin.send('find-all-category', ''));
-
-    console.log('categoriesDatabase=>', categoriesDatabase);
 
     const categories = [
       {
@@ -64,7 +65,7 @@ export class AppService implements OnApplicationBootstrap {
           categoriesDatabase.push(resp);
         }
       } catch (error) {
-        if (error.message.includes('E11000 ')) this.logger.log(`Seeder : ${error.message}`);
+        if (error.message.includes('E11000')) this.logger.log(`Seeder : ${error.message}`);
       }
     }
 
@@ -92,6 +93,12 @@ export class AppService implements OnApplicationBootstrap {
         avatar: this.configService.get('DEFAULT_PLAYER_AVATAR_URL'),
       },
     ];
+
+    const usersDatabase: any[] = await lastValueFrom(this.clientRabbitMQAdmin.send('find-all-player', ''));
+
+    const existUser = await usersDatabase.find((user) => user.email === this.configService.get('DEFAULT_PLAYER_EMAIL'));
+
+    if (existUser) return existUser;
 
     for await (const user of users) {
       try {
