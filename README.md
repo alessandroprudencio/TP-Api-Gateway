@@ -11,9 +11,13 @@
 
 API Gateway that encapsulates the system's internal architecture and offers a custom API for each client.
 
-## Architecture
+## Architecture Microservices
 
-<img src="https://github.com/alessandroprudencio/TP-Api-Gateway/blob/develop/src/assets/microsservice-architeture.png" width="1220" alt="Architecture img" />
+<img src="https://github.com/alessandroprudencio/TP-Api-Gateway/blob/develop/src/assets/microservice-architeture.png" width="1220" alt="Architecture img" />
+
+## Architecture CI/CD
+
+<img src="https://d2908q01vomqb2.cloudfront.net/fe2ef495a1152561572949784c16bf23abb28057/2020/02/05/Screen-Shot-2020-01-08-at-5.55.15-PM.png" width="1220" alt="Architecture CI/CD" />
 
 ## Installation
 
@@ -36,6 +40,8 @@ The player will be created according to what was filled in the variables ​​D
 - [AWS](https://aws.amazon.com/)
 - [AWS S3](https://aws.amazon.com/s3)
 - [ECS](https://aws.amazon.com/ecs)
+- [CodeBuild](https://aws.amazon.com/codebuild/)
+- [CodePipeline](https://aws.amazon.com/codepipeline/)
 
 ## Connect with me:
 
