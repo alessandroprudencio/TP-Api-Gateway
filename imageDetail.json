@@ -1,0 +1,6 @@
+[
+  {
+    "name":"tp-api-gateway-docker-image",
+    "imageUri":"alessandroprudencio/tp-api-gateway:latest"
+  }
+]
