@@ -4,6 +4,6 @@ import { Controller, Get } from '@nestjs/common';
 export class AppController {
   @Get()
   welcome() {
-    return 'Welcome to the Tennis Player api ❤️❤️';
+    return 'Welcome to the Tennis Player api ❤️';
   }
 }
