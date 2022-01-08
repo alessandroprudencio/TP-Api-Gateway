@@ -8,8 +8,6 @@ phases:
       - REPOSITORY_URI=alessandroprudencio/tp-api-gateway
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
-      - echo Install sonarqube-scanner
-      - npm install -g sonarqube-scanner
   build:
     commands:
       - echo Build started on `date`
@@ -19,8 +17,6 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Start sonarqube
-      - npm run sonar
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
