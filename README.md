@@ -40,8 +40,8 @@ The player will be created according to what was filled in the variables ​​D
 - [AWS](https://aws.amazon.com/)
 - [AWS S3](https://aws.amazon.com/s3)
 - [ECS](https://aws.amazon.com/ecs)
-- [CodeBuild](https://aws.amazon.com/codebuild/)
 - [CodePipeline](https://aws.amazon.com/codepipeline/)
+- [Sonarcloud](https://sonarcloud.io/)
 
 ## Connect with me:
 
